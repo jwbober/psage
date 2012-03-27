@@ -40,6 +40,7 @@ def cython(f_pyx, language, include_dirs, force):
     # output filename
     dir, f = os.path.split(f_pyx)
     ext = 'cpp' if language == 'c++' else 'c'
+    cpp_option = '--cplus' if language == 'c++' else ''
     outfile = os.path.splitext(f)[0] + '.' + ext
     full_outfile = dir + '/' + outfile
     if not force:
@@ -48,8 +49,8 @@ def cython(f_pyx, language, include_dirs, force):
             return full_outfile, []
     includes = ''.join(["-I '%s' "%x for x in include_dirs])
     # call cython
-    cmd = "cd %s && python `which cython` --embed-positions --directive cdivision=False %s -o %s %s"%(
-        dir, includes, outfile, f)
+    cmd = "cd %s && python `which cython` --embed-positions --directive cdivision=False %s %s -o %s %s"%(
+        dir, cpp_option, includes, outfile, f)
     return full_outfile, [cmd]
 
 class Extension(setuptools.Extension):

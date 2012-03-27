@@ -18,6 +18,7 @@ MANIFEST
 docs/ascent.pdf
 docs/notebook.out
 *.so
+*.swp
 
 a.py
 a.sage
