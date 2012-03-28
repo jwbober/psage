@@ -160,7 +160,23 @@ ext_modules = [
               libraries = ['gmp', 'm'],
               include_dirs = ['psage/libs/smalljac/'],
               language = 'c'
-              )
+              ),
+    
+    Extension("psage.libs.lcalc.wrapper",
+              sources = ['psage/libs/lcalc/Lglobals.cc',
+                         'psage/libs/lcalc/Lmisc.cc',
+                         'psage/libs/lcalc/Lgamma.cc',
+                         'psage/libs/lcalc/Lriemannsiegel.cc',
+                         'psage/libs/lcalc/Lnumbertheory.cc',
+                         'psage/libs/lcalc/Lelliptic.cc',
+                         'psage/libs/lcalc/Ldokchitser.cc',
+                         'psage/libs/lcalc/wrapper.pyx'],
+              language = 'c++',
+              include_dirs = ['psage/libs/lcalc/include'],
+              extra_compile_args = ['-DUSE_DOUBLE',
+                                    '--fast-math',
+                                    '-fno-finite-math-only']),
+
 ]
 
 for g in [1, 2]:

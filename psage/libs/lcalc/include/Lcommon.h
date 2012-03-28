@@ -31,6 +31,25 @@ inline double lcalc_to_double(const Double& x) {
 #endif
 }
 
+// To aid conversion to int value
+inline double lcalc_to_double(const long double& x) {
+#ifdef USE_DOUBLE
+    return x;
+#elif USE_LONG_DOUBLE
+    return x;
+#elif USE_BAILEY_DD
+    return to_double(x); //use Bailey's to_double
+#elif USE_BAILEY_QD
+    return to_double(x); //use Bailey's to_double
+#elif USE_MPFR
+    return x.get_d();
+#elif USE_MPFRCPP
+    return double(x);
+#endif
+}
+
+
+
 /*
 #ifdef USE_BAILEY_QD
     inline qd_real::qd_real(long long x0) {

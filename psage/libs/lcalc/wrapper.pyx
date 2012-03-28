@@ -19,6 +19,11 @@ from sage.modular.dirichlet import DirichletCharacter
 from sage.schemes.elliptic_curves.ell_rational_field import EllipticCurve_rational_field
 from sage.all import RR, CC, EllipticCurve
 
+try:
+    from dirichlet_conrey import DirichletCharacter_conrey
+except:
+    DirichletCharacter_conrey = type(None) # this is probably a bad way to do this
+
 initialize_globals()
 
 cdef double pi = 3.14159265358979
@@ -70,7 +75,7 @@ def Lfunction(X = None, max_t = 1000):
     if X is None:
         return Lfunction_class()
     
-    if isinstance(X, DirichletCharacter):
+    if isinstance(X, (DirichletCharacter, DirichletCharacter_conrey)):
         return Lfunction_from_character(X)
 
     if isinstance(X, EllipticCurve_rational_field):
