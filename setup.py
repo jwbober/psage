@@ -145,6 +145,11 @@ ext_modules = [
               ["psage/number_fields/sqrt5/prime.pyx"],
               libraries = ['pari']),
 
+    Extension('psage.curve_finding.mod_jon',
+              ['psage/curve_finding/mod_jon.pyx'],
+              libraries = ['pari'],
+              extra_compile_args = ['-std=c99']),
+
     Extension("psage.modform.rational.special_fast",
               ["psage/modform/rational/special_fast.pyx", SAGE_ROOT + "/devel/sage/sage/libs/flint/fmpq_poly.c"],
               libraries = ['gmp', 'flint'],
@@ -220,6 +225,8 @@ build_system.setup(
 
                 'psage.number_fields',
                 'psage.number_fields.sqrt5',
+
+                'psage.curve_finding',
 
                 'psage.rh',
                 'psage.rh.mazur_stein'

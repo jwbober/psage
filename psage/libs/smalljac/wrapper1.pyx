@@ -66,6 +66,11 @@ cdef int callback_ap_single(smalljac_Qcurve_t c, unsigned long p, int good,  lon
 
 cpdef long elliptic_curve_ap(unsigned long a4, unsigned long a6, unsigned long p, unsigned long flags=0):
     s = 'x^3+%sx+%s'%(a4,a6)
-    cdef long a[2]
-    smalljac_Lpoly(a, s, p, flags)
-    return -a[0]
+    cdef long a
+    cdef int b
+    b = smalljac_Lpoly(&a, s, p, flags)
+    if b == 1:
+        return -a
+    if b == 0 or b == -5:
+        return p+1l
+    raise RuntimeError
