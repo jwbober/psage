@@ -165,7 +165,10 @@ ext_modules = [
               libraries = ['gmp', 'm'],
               include_dirs = ['psage/libs/smalljac/'],
               language = 'c'
-              )
+              ),
+
+    Extension("psage.ellcurve.search.sqrt5",
+              sources = ['psage/ellcurve/search/sqrt5.pyx'])
 ]
 
 for g in [1, 2]:
